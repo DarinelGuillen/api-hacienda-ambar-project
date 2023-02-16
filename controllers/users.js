@@ -10,6 +10,16 @@ const getUsers = async (req, res) => {
     res.json(users);
   });
 };
+// Obtener un objeto por su id 
+const getUser = async (req, res) => {
+  User.find({_id: req.params.userID},
+    (err, user) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(user);
+  });
+};
 // Crear un objeto con el formato indicado
 const createUser = async (req, res) => {
   const user = new User({
@@ -61,6 +71,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getUsers,
+  getUser,
   createUser,
   updateUser,
   deleteUser

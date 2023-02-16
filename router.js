@@ -31,6 +31,7 @@ const {
 //--------USERS----------------------//
 const {
   getUsers,
+  getUser,
   createUser,
   updateUser,
   deleteUser
@@ -75,9 +76,11 @@ router.put("/membresias/:membresiasID",updateMembresia);
 router.delete("/membresias/:membresiaID",deleteMembresia);
 //----------USERS----------------------//
 router.get("/users", getUsers); 
+router.get("/user/:userID", getUser); 
 router.post("/users", createUser); 
 router.put("/users/:userID",updateUser ); 
 router.delete("/users/:userID",deleteUser);
+
 //----------RENTA INDIVIDUAL----------------------//
 router.get("/rentaindividuales", getRentIndiv); 
 router.post("/rentaindividuales", createRentIndv); 
