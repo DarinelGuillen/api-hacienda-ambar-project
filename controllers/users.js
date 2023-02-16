@@ -10,9 +10,28 @@ const getUsers = async (req, res) => {
     res.json(users);
   });
 };
+// Crear un objeto con el formato indicado
+const createUser = async (req, res) => {
+  const user = new User({
+    admin: req.body.admin,
+    nombreDeUsuario: req.body.nombreDeUsuario,
+    nombreCompleto: req.body.nombreCompleto,
+    numTel: req.body.numTel,
+    edad: req.body.edad,
+    correo: req.body.correo,
+  });
+
+  user.save( async (err, user) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(user);
+  });
+};
 
 
 
 module.exports = {
-  getUsers
+  getUsers,
+  createUser
 };
