@@ -48,12 +48,18 @@ const updatePaquete = async (req, res) => {
     }
   );
 };
-
+// borrar un elemento a través del _id
+const deletePaquete = async (req, res) => {
+  Paquete.deleteOne({ _id: req.params.paqueteID })
+    .then(() => res.json({ message: "Paquete Deleted" }))
+    .catch((err) => res.send(err));
+};
 
 
 
 module.exports = {
 getPaquetes,
 createPaquete,
-updatePaquete
+updatePaquete,
+deletePaquete
 };

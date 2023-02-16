@@ -54,11 +54,18 @@ const updateRentaUsuario = async (req, res) => {
     }
   );
 };
+// borrar un elemento a través del _id
+const deleteRentaUsuario = async (req, res) => {
+  RentaUsuario.deleteOne({ _id: req.params.rentaUsuarioID })
+    .then(() => res.json({ message: "RentaUsuario Deleted" }))
+    .catch((err) => res.send(err));
+};
 
 
 
 module.exports = {
 getRentasUsuario,
 createRentaUsuario,
-updateRentaUsuario
+updateRentaUsuario,
+deleteRentaUsuario
 };

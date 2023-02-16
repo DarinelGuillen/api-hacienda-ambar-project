@@ -46,11 +46,17 @@ const updateRentIndv = async (req, res) => {
     }
   );
 };
+// borrar un elemento a través del _id
+const deleteRentIndv = async (req, res) => {
+  RentaIndividual.deleteOne({ _id: req.params.rentaIndividualID })
+    .then(() => res.json({ message: "RentaIndividual Deleted" }))
+    .catch((err) => res.send(err));
+};
 
 
 module.exports = {
 getRentIndiv,
 createRentIndv,
-updateRentIndv
-  
+updateRentIndv,
+deleteRentIndv
 };

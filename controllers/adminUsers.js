@@ -43,6 +43,12 @@ const updateAdminUser = async (req, res) => {
     }
   );
 };
+// borrar un elemento a través del _id
+const deleteAdminUsers = async (req, res) => {
+  AdminUsers.deleteOne({ _id: req.params.adminUsersID })
+    .then(() => res.json({ message: "AdminUsers Deleted" }))
+    .catch((err) => res.send(err));
+};
 
 
 
@@ -50,4 +56,5 @@ module.exports = {
   getAdminUsers,
   createAdminUser,
   updateAdminUser,
+  deleteAdminUsers
 };

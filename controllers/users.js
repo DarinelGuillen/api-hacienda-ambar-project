@@ -50,11 +50,18 @@ const updateUser = async (req, res) => {
     }
   );
 };
+// borrar un elemento a través del _id
+const deleteUser = async (req, res) => {
+  User.deleteOne({ _id: req.params.userID })
+    .then(() => res.json({ message: "User Deleted" }))
+    .catch((err) => res.send(err));
+};
 
 
 
 module.exports = {
   getUsers,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 };

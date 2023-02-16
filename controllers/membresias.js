@@ -47,6 +47,13 @@ const updateMembresia = async (req, res) => {
   );
 };
 
+// borrar un elemento a través del _id
+const deleteMembresia = async (req, res) => {
+  Membresia.deleteOne({ _id: req.params.membresiaID })
+    .then(() => res.json({ message: "Membresia Deleted" }))
+    .catch((err) => res.send(err));
+};
+
 
 
 // 
@@ -54,4 +61,5 @@ module.exports = {
 getMembresias,
 createMembresia,
 updateMembresia,
+deleteMembresia
 };
