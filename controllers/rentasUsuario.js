@@ -31,10 +31,34 @@ const createRentaUsuario = async (req, res) => {
   });
 };
 
+// actualizar un elemento a partir del _id
+const updateRentaUsuario = async (req, res) => {
+  RentaUsuario.findOneAndUpdate(
+    { _id: req.params.rentaUsuarioID },
+    {
+      $set: {
+        idRenta: req.body.idRenta,
+        precioTotal: req.body.precioTotal,
+        fechaInicio: req.body.fechaInicio,
+        fechaFinalizacion: req.body.fechaFinalizacion,
+        estadoRenta: req.body.estadoRenta,
+        fechaDeReserva: req.body.fechaDeReserva,
+        nombreDePaquete: req.body.nombreDePaquete,
+      },
+    },
+    { new: true },
+    (err, RentaUsuario) => {
+      if (err) {
+        res.send(err);
+      } else res.json(RentaUsuario);
+    }
+  );
+};
 
 
 
 module.exports = {
 getRentasUsuario,
 createRentaUsuario,
+updateRentaUsuario
 };

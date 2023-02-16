@@ -27,11 +27,31 @@ const createMembresia = async (req, res) => {
   });
 };
 
+// actualizar un elemento a partir del _id
+const updateMembresia = async (req, res) => {
+  Membresia.findOneAndUpdate(
+    { _id: req.params.membresiasID},
+    {
+      $set: {
+        nombre: req.body.nombre,
+        fechaCorte: req.body.fechaCorte,
+        descuento: req.body.descuento,
+      },
+    },
+    { new: true },
+    (err, Membresia) => {
+      if (err) {
+        res.send(err);
+      } else res.json(Membresia);
+    }
+  );
+};
+
 
 
 // 
 module.exports = {
 getMembresias,
 createMembresia,
-  
+updateMembresia,
 };

@@ -28,10 +28,32 @@ const createPaquete = async (req, res) => {
   });
 };
 
+// actualizar un elemento a partir del _id
+const updatePaquete = async (req, res) => {
+  Paquete.findOneAndUpdate(
+    { _id: req.params.paqueteID },
+    {
+      $set: {
+        nombrePaquete: req.body.nombrePaquete,
+        precio: req.body.precio,
+        img: req.body.img,
+        descripcion: req.body.descripcion,
+      },
+    },
+    { new: true },
+    (err, Paquete) => {
+      if (err) {
+        res.send(err);
+      } else res.json(Paquete);
+    }
+  );
+};
+
 
 
 
 module.exports = {
 getPaquetes,
 createPaquete,
+updatePaquete
 };

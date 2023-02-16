@@ -28,10 +28,33 @@ const createUser = async (req, res) => {
     res.json(user);
   });
 };
+// actualizar un elemento a partir del _id
+const updateUser = async (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.params.userID },
+    {
+      $set: {
+        admin: req.body.admin,
+        nombreDeUsuario: req.body.nombreDeUsuario,
+        numTel: req.body.numTel,
+        nombreCompleto: req.body.nombreCompleto,
+        edad: req.body.edad,
+        correo: req.body.correo,
+      },
+    },
+    { new: true },
+    (err, User) => {
+      if (err) {
+        res.send(err);
+      } else res.json(User);
+    }
+  );
+};
 
 
 
 module.exports = {
   getUsers,
-  createUser
+  createUser,
+  updateUser
 };

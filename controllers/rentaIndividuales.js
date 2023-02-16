@@ -27,10 +27,30 @@ const createRentIndv = async (req, res) => {
   });
 };
 
+// actualizar un elemento a partir del _id
+const updateRentIndv = async (req, res) => {
+  RentaIndividual.findOneAndUpdate(
+    { _id: req.params.rentaIndividualID },
+    {
+      $set: {
+        id: req.body.id,
+        precio: req.body.precio,
+        tiempo: req.body.tiempo,
+      },
+    },
+    { new: true },
+    (err, RentaIndividual) => {
+      if (err) {
+        res.send(err);
+      } else res.json(RentaIndividual);
+    }
+  );
+};
 
 
 module.exports = {
 getRentIndiv,
 createRentIndv,
+updateRentIndv
   
 };
