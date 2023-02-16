@@ -25,10 +25,29 @@ const createAdminUser = async (req, res) => {
   });
 };
 
+// actualizar un elemento a partir del _id
+const updateAdminUser = async (req, res) => {
+  AdminUsers.findOneAndUpdate(
+    { _id: req.params.adminUsersID },
+    {
+      $set: {
+        nombreAdmin: req.body.nombreAdmin,
+        password: req.body.password
+      },
+    },
+    { new: true },
+    (err, AdminUsers) => {
+      if (err) {
+        res.send(err);
+      } else res.json(AdminUsers);
+    }
+  );
+};
 
 
 
 module.exports = {
   getAdminUsers,
   createAdminUser,
+  updateAdminUser,
 };

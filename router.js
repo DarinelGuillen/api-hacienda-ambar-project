@@ -4,6 +4,7 @@
 const {
   getAdminUsers,
   createAdminUser,
+  updateAdminUser,
 } = require("./controllers/adminUsers");
 //--------paquete----------------------//
 const {
@@ -42,6 +43,8 @@ router.get("/", async (req, res) => {
 //--------AdminUser----------------------//
 router.get("/adminusers", getAdminUsers); 
 router.post("/adminusers",createAdminUser);
+router.put("/adminusers/:adminUsersID",updateAdminUser);
+
 //--------PAQUETES----------------------//
 router.get("/paquetes", getPaquetes); 
 router.post("/paquetes", createPaquete); 
