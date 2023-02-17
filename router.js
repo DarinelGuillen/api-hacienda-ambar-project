@@ -76,7 +76,7 @@ router.put("/membresias/:membresiasID",updateMembresia);
 router.delete("/membresias/:membresiaID",deleteMembresia);
 //----------USERS----------------------//
 router.get("/users", getUsers); 
-router.get("/user/:userID", getUser); 
+router.get("/user/:userNOMBREDEUSUARIO", getUser); 
 router.post("/users", createUser); 
 router.put("/users/:userID",updateUser ); 
 router.delete("/users/:userID",deleteUser);

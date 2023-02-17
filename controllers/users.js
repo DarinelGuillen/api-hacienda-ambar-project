@@ -12,7 +12,7 @@ const getUsers = async (req, res) => {
 };
 // Obtener un objeto por su id 
 const getUser = async (req, res) => {
-  User.find({_id: req.params.userID},
+  User.find({nombreDeUsuario: req.params.userNOMBREDEUSUARIO},
     (err, user) => {
     if (err) {
       res.send(err);
