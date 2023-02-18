@@ -12,24 +12,31 @@ const getUsers = async (req, res) => {
 };
 // Obtener un objeto por su id 
 const getUser = async (req, res) => {
-  let username = req.params.userNOMBREDEUSUARIO
-  let password = req.params.userPASSWORD
-  let datos =[];
-  User.find({nombreDeUsuario: req.params.userNOMBREDEUSUARIO},
-    (err, user) => {
-    if (err) {
-      res.send(err); // HTTP codes
+  try {
+    let username = req.params.userNOMBREDEUSUARIO
+    let password = req.params.userPASSWORD
+    let datos = []
+    const user = await User.findOne({nombreDeUsuario: req.params.userNOMBREDEUSUARIO}).exec()
+    if (!user) {
+      return res.status(404).send({ message: "Usuario no encontrado" })
     } 
-    if (username === user[0].nombreDeUsuario) {
+    if (username === user.nombreDeUsuario) {
       console.log("paso if user")
-      if(password === user[0].numTel){
+      if(password === user.numTel){
         console.log('paso if passw')
-        datos.push(user[0]._id,user[0].admin,user[0].nombreDeUsuario);
-        console.log(username,password,datos)
-        res.json({ datos} );
+        datos.push(user._id, user.admin, user.nombreDeUsuario)
+        console.log(username, password, datos)
+        return res.status(200).json({ datos })
+      } else {
+        return res.status(400).send({ message: "Contraseña incorrecta" })
       }
-    }res.send("no se encontro");
-  });
+    } else {
+      return res.status(400).send({ message: "Nombre de usuario incorrecto" })
+    }
+  } catch (error) {
+    console.error(error)
+    return res.status(500).send({ error: "Error en el servidor" })
+  }
 };
 // Crear un objeto con el formato indicado
 const createUser = async (req, res) => {
