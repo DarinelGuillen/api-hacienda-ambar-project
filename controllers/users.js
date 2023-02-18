@@ -12,12 +12,23 @@ const getUsers = async (req, res) => {
 };
 // Obtener un objeto por su id 
 const getUser = async (req, res) => {
+  let username = req.params.userNOMBREDEUSUARIO
+  let password = req.params.userPASSWORD
+  let datos =[];
   User.find({nombreDeUsuario: req.params.userNOMBREDEUSUARIO},
     (err, user) => {
     if (err) {
-      res.send(err);
-    }
-    res.json(user);
+      res.send(err); // HTTP codes
+    } 
+    if (username === user[0].nombreDeUsuario) {
+      console.log("paso if user")
+      if(password === user[0].numTel){
+        console.log('paso if passw')
+        datos.push(user[0]._id,user[0].admin,user[0].nombreDeUsuario);
+        console.log(username,password,datos)
+        res.json({ datos} );
+      }
+    }res.send("no se encontro");
   });
 };
 // Crear un objeto con el formato indicado
