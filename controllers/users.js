@@ -40,8 +40,12 @@ const validLogin = async (req, res) => {
 };
 // Crear un objeto con el formato indicado
 const createUser = async (req, res) => {
+  if (!req.body) {
+    return res.status(400).json({ message: 'Request body missing' });
+  }
+
   const user = new User({
-    admin: req.body.admin,
+    admin: req.body.admin || false,
     nombreDeUsuario: req.body.nombreDeUsuario,
     nombreCompleto: req.body.nombreCompleto,
     numTel: req.body.numTel,
@@ -50,7 +54,7 @@ const createUser = async (req, res) => {
     password: req.body.password,
   });
 
-  user.save( async (err, user) => {
+  user.save(async (err, user) => {
     if (err) {
       res.send(err);
     }
