@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
   });
 };
 // Obtener un objeto por su id 
-const getUser = async (req, res) => {
+const validLogin = async (req, res) => {
   try {
     let username = req.params.userNOMBREDEUSUARIO
     let password = req.params.userPASSWORD
@@ -22,7 +22,7 @@ const getUser = async (req, res) => {
     } 
     if (username === user.nombreDeUsuario) {
       console.log("paso if user")
-      if(password === user.numTel){
+      if(password === user.contrasenia){
         console.log('paso if passw')
         datos.push(user._id, user.admin, user.nombreDeUsuario)
         console.log(username, password, datos)
@@ -47,6 +47,7 @@ const createUser = async (req, res) => {
     numTel: req.body.numTel,
     edad: req.body.edad,
     correo: req.body.correo,
+    password: req.body.password,
   });
 
   user.save( async (err, user) => {
@@ -68,6 +69,7 @@ const updateUser = async (req, res) => {
         nombreCompleto: req.body.nombreCompleto,
         edad: req.body.edad,
         correo: req.body.correo,
+        password: req.body.password,
       },
     },
     { new: true },
@@ -89,7 +91,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getUsers,
-  getUser,
+  validLogin,
   createUser,
   updateUser,
   deleteUser

@@ -1,6 +1,6 @@
 const {
     getUsers,
-    validLogin,
+    getUser,
     createUser,
     updateUser,
     deleteUser
@@ -9,7 +9,7 @@ const {
   const router = require("express").Router();
 
   router.get("/", getUsers); 
-  router.get("/:userNOMBREDEUSUARIO/:userPASSWORD",validLogin ); 
+  router.get("/:userNOMBREDEUSUARIO",getUser ); 
   router.post("/", createUser); 
   router.put("/:userID",updateUser ); 
   router.delete("/:userID",deleteUser);

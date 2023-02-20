@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
   correo:{
     type: String,
     required: true,
+  },
+  contrasenia:{
+    type: String,
+    required: true,
   }
 });
 
