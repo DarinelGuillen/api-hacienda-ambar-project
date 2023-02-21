@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   numTel: {
     type: String,
-    default: true,
+    required: true,
   },
   edad:{
     type: String,
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  contrasenia:{
+  password:{
     type: String,
     required: true,
   }
