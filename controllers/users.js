@@ -22,7 +22,7 @@ const validLogin = async (req, res) => {
     } 
     if (username === user.nombreDeUsuario) {
       console.log("paso if user")
-      if(password === user.contrasenia){
+      if(password === user.password){
         console.log('paso if passw')
         datos.push(user._id, user.admin, user.nombreDeUsuario)
         console.log(username, password, datos)
@@ -69,11 +69,11 @@ const updateUser = async (req, res) => {
       $set: {
         admin: req.body.admin,
         nombreDeUsuario: req.body.nombreDeUsuario,
-        numTel: req.body.numTel,
         nombreCompleto: req.body.nombreCompleto,
+        numTel: req.body.numTel,
         edad: req.body.edad,
         correo: req.body.correo,
-        password: req.body.password,
+        password: req.body.password
       },
     },
     { new: true },

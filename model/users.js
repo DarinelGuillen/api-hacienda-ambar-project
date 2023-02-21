@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   numTel: {
     type: String,
-    default: true,
+    required: true,
   },
   edad:{
     type: String,
