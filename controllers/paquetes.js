@@ -10,6 +10,16 @@ const getPaquetes = async (req, res) => {
     res.json(paquetes);
   });
 };
+//Encontrar paquete por _ID
+const getPaquete = async (req, res) => {
+  
+  Paquete.findOne({  _id: req.params.paqueteID }, (err, paquete) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(paquete);
+  });
+};
 
 // Crear un objeto con el formato indicado
 const createPaquete = async (req, res) => {
@@ -59,6 +69,7 @@ const deletePaquete = async (req, res) => {
 
 module.exports = {
 getPaquetes,
+getPaquete,
 createPaquete,
 updatePaquete,
 deletePaquete
