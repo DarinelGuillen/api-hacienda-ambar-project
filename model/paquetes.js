@@ -2,48 +2,23 @@
 const mongoose = require("mongoose");
 
 // Definicion del esquema a utilizar 
-const RentaUsuarioSchema = new mongoose.Schema({
-  idRenta: {
+const PaqueteSchema = new mongoose.Schema({
+   nombrePaquete: {
     type: String,
     required: true,
   },
-  idPaquete: {
-    type: String,
-    required: true,
-  },
-  idUser: {
-    type: String,
-    required: true,
-  },
-  fechaInicio: {
-    type: Date,
-    required: true,
-  },
-  fechaFinalizacion: {
-    type: Date,
-    required: true,
-  },
-  fechaDeReserva: {
-    type: Date,
-    required: true,
-  },
-  precioTotal: {
+  precio: {
     type: Number,
     required: true,
   },
-  estadoRenta: {
-    type: Boolean,
-    required: true,
-  },
-  observaciones: {
+  img: {
     type: String,
-    required: true,
+    default: true,
   },
-  SeEjecutoConExitoLarenta: {
-    type: Boolean,
-    required: true,
+  descripcion: {
+    type: String,
+    default: true,
   },
 });
-
 
 module.exports = mongoose.model("Paquete", PaqueteSchema);
