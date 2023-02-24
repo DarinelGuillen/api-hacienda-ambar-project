@@ -3,10 +3,7 @@ const mongoose = require("mongoose");
 
 // Definicion del esquema a utilizar 
 const RentaUsuarioSchema = new mongoose.Schema({
-  idRenta: {
-    type: String,
-    required: true,
-  },
+  
   idPaquete: {
     type: String,
     required: true,
