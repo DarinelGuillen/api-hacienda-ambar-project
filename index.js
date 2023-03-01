@@ -5,6 +5,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 //routes
+// const trigger = require('./trigger');
+// const Etrigger = require('./Etrigger');
 const userRouter = require("./routers/users")
 const adminUsersRouter = require("./routers/adminUsers")
 const membresiasRouter = require("./routers/membresias")
