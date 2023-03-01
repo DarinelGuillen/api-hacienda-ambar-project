@@ -3,6 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const fs = require('fs');
+const https = require('https');
+
 
 //routes
 const userRouter = require("./routers/users")
@@ -19,7 +22,7 @@ const rentasUsuarioRouter = require("./routers/rentasUsuario")
 dotenv.config();
 
 // Puerto 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORTSERVERAWS|| 8000;
 const app = express();
 
 // Libreria para mongodb - usa URL que debe existir en .env
@@ -50,6 +53,12 @@ app.use("/paquetes",paquetesRouter)
 app.use("/rentaindividuales",rentaIndividualesRouter)
 app.use("/rentasUsuario",rentasUsuarioRouter)
 
-app.listen(PORT, async () => {
-  console.log(`server up on port ${PORT}`);
+
+const PORTSERVERAWS = process.env.PORTSERVERAWS;
+
+https.createServer({
+cert: fs.readFileSync('./certificates/fullchain1.pem','utf8'),
+key: fs.readFileSync('./certificates/privkey1.pem','utf8')
+},app).listen(PORTSERVERAWS, function(){
+console.log('Servidor https corriendo en el puerto 443');
 });
