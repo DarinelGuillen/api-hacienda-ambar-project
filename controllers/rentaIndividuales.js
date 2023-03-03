@@ -3,7 +3,7 @@ const RentaIndividual = require("../model/rentaIndividuales");
 
 // Obtener todos los objetos
 const getRentIndiv = async (req, res) => {
-RentaIndividual.find((err,rentaindividuales) => {
+  RentaIndividual.find((err, rentaindividuales) => {
     if (err) {
       res.send(err);
     }
@@ -14,17 +14,20 @@ RentaIndividual.find((err,rentaindividuales) => {
 // Crear un objeto con el formato indicado
 const createRentIndv = async (req, res) => {
   const rentaIndividual = new RentaIndividual({
-    id: req.body.id,
-    precio: req.body.precio,
-    tiempo: req.body.tiempo,
+    idNum: req.body.idNum,
+    precioAprox: req.body.precioAprox,
+    descripcion: req.body.descripcion,
+    value: req.body.value,
+    cortoPlazo: req.body.cortoPlazo,
+    normal: req.body.normal,
+    ultimoMinuto: req.body.ultimoMinuto,
   });
-
-  rentaIndividual.save( async (err, rentaIndividual) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(rentaIndividual);
-  });
+  try {
+    const newRentaIndividual = await rentaIndividual.save();
+    res.status(201).json(newRentaIndividual);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
 // actualizar un elemento a partir del _id
@@ -33,9 +36,13 @@ const updateRentIndv = async (req, res) => {
     { _id: req.params.rentaIndividualID },
     {
       $set: {
-        id: req.body.id,
-        precio: req.body.precio,
-        tiempo: req.body.tiempo,
+        idNum: req.body.idNum,
+        precioAprox: req.body.precioAprox,
+        descripcion: req.body.descripcion,
+        value: req.body.value,
+        cortoPlazo: req.body.cortoPlazo,
+        normal: req.body.normal,
+        ultimoMinuto: req.body.ultimoMinuto,
       },
     },
     { new: true },
@@ -53,10 +60,9 @@ const deleteRentIndv = async (req, res) => {
     .catch((err) => res.send(err));
 };
 
-
 module.exports = {
-getRentIndiv,
-createRentIndv,
-updateRentIndv,
-deleteRentIndv
+  getRentIndiv,
+  createRentIndv,
+  updateRentIndv,
+  deleteRentIndv,
 };
