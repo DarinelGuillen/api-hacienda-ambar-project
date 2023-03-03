@@ -7,8 +7,16 @@ const {
 
 const router = require("express").Router();
 
-router.get("/", getRentasUsuario); 
-router.post("/", createRentaUsuario);
+const rateLimit = require("express-rate-limit");
+
+const accountLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000 * 24, // 1 dia
+  max: 1, // limita cada IP a 6 peticiones por el tiempo definido con "windowMs"
+  message: "Por seguridad restringimos peticiones de tu IP"
+});
+
+router.get("/",getRentasUsuario); 
+router.post("/", accountLimiter, createRentaUsuario);
 router.put("/:rentaUsuarioID", updateRentaUsuario);
 router.delete("/:rentaUsuarioID", deleteRentaUsuario);
 

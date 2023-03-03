@@ -13,7 +13,7 @@ const {
   //funcion para limitar peticiones
   const accountLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hora
-    max: 10, // limita cada IP a 6 peticiones por el tiempo definido con "windowMs"
+    max: 100, // limita cada IP a 6 peticiones por el tiempo definido con "windowMs"
     message: "Por seguridad restringimos peticiones de tu IP"
   });
 

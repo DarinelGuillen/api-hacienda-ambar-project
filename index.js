@@ -8,6 +8,8 @@ const https = require('https');
 
 
 //routes
+// const trigger = require('./trigger');
+// const Etrigger = require('./Etrigger');
 const userRouter = require("./routers/users")
 const adminUsersRouter = require("./routers/adminUsers")
 const membresiasRouter = require("./routers/membresias")

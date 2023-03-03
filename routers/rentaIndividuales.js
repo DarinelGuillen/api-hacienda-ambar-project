@@ -7,6 +7,8 @@ const {
 
   const router = require("express").Router();
 
+  
+
 router.get("/", getRentIndiv); 
 router.post("/", createRentIndv); 
 router.put("/:rentaIndividualID", updateRentIndv);
