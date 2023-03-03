@@ -1,21 +1,36 @@
 // Modelo de datos de Mongo
 const mongoose = require("mongoose");
 
-// Definicion del esquema a utilizar 
+// Definicion del esquema a utilizar
 const RenIndvSchema = new mongoose.Schema({
-  id: {
+  idNum: {
     type: Number,
     required: true,
   },
-  precio: {
+  precioAprox: {
     type: String,
     required: true,
   },
-  tiempo: {
+  descripcion: {
     type: String,
-    default: true,
+    required: true,
   },
-  
+  value: {
+    type: String,
+    required: true,
+  },
+  cortoPlazo: {
+    type: Boolean,
+    required: true,
+  },
+  normal: {
+    type: Boolean,
+    required: true,
+  },
+  ultimoMinuto: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("RentaIndividual", RenIndvSchema);
