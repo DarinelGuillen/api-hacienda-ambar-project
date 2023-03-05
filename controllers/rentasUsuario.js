@@ -13,26 +13,28 @@ const getRentasUsuario = async (req, res) => {
 
 // Crear un objeto con el formato indicado
 const createRentaUsuario = async (req, res) => {
-  const rentaUsuario = new RentaUsuario({
-    idPaquete: req.body.idPaquete,
+  const nuevaRenta = {
+    
+    idPaquete: req.body.idPaquete ,
     idUser: req.body.idUser,
     fechaInicio: req.body.fechaInicio,
-    fechaFinalizacion: req.body.fechaFinalizacion,
+    horaDeInicio: req.body.horaDeInicio,
+    horaDeFinalizacion: req.body.horaDeFinalizacion,
     fechaDeReserva: req.body.fechaDeReserva,
-    estadoRenta: req.body.estadoRenta,
-    precioTotal: req.body.precioTotal,
-    fechaDeReserva: req.body.fechaDeReserva,
+    Extras: req.body.Extras,
     estadoRenta: req.body.estadoRenta,
     observaciones: req.body.observaciones,
-    SeEjecutoConExitoLarenta: req.body.SeEjecutoConExitoLarenta,
-  });
+    SeEjecutoConExitoLarenta: req.body.SeEjecutoConExitoLarenta
+  };
 
-  rentaUsuario.save(async (err, rentaUsuario) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(rentaUsuario);
-  });
+  try {
+    const rentaUsuario = new RentaUsuario(nuevaRenta);
+    await rentaUsuario.save();
+    res.status(201).json(rentaUsuario);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error creating renta usuario' });
+  }
 };
 
 // actualizar un elemento a partir del _id

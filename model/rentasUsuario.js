@@ -13,24 +13,29 @@ const RentaUsuarioSchema = new mongoose.Schema({
     required: true,
   },
   fechaInicio: {
-    type: Date,
+    type: String,
     required: true,
   },
-  fechaFinalizacion: {
-    type: Date,
+  horaDeInicio: {
+    type: String,
+    required: true,
+  },
+  horaDeFinalizacion: {
+    type: String,
     required: true,
   },
   fechaDeReserva: {
-    type: Date,
+    type: String,
     required: true,
   },
-  precioTotal: {
-    type: Number,
+  Extras: {
+    type: [String],
     required: true,
   },
   estadoRenta: {
     type: Boolean,
     required: true,
+    
   },
   observaciones: {
     type: String,
@@ -38,7 +43,7 @@ const RentaUsuarioSchema = new mongoose.Schema({
   },
   SeEjecutoConExitoLarenta: {
     type: Boolean,
-    required: true,
+    required: false,
   },
 });
 
