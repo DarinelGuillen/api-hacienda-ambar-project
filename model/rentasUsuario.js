@@ -45,6 +45,10 @@ const RentaUsuarioSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
   },
+  LinkFotos: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("RentaUsuario", RentaUsuarioSchema);

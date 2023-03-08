@@ -1,8 +1,13 @@
 const {
     getRentasUsuario,
+    getFalseRentasUsuario,
+    getFinalizacion,
+    getIdRentaUsuario,
     createRentaUsuario,
-    updateRentaUsuario,
+    updateEstadoRenta,
+    updateSeEjecutoConExitoLarenta,
     deleteRentaUsuario
+    
   } = require("../controllers/rentasUsuario");
 
 const router = require("express").Router();
@@ -16,8 +21,12 @@ const accountLimiter = rateLimit({
 });
 
 router.get("/",getRentasUsuario); 
+router.get("/estadoFalse",getFalseRentasUsuario); 
+router.get("/Finalizar",getFinalizacion); 
+router.get("/:UserID",getIdRentaUsuario); 
 router.post("/", accountLimiter, createRentaUsuario);
-router.put("/:rentaUsuarioID", updateRentaUsuario);
+router.put("/:rentaUsuarioID", updateEstadoRenta);
+router.put("/:rentaUsuarioID/:estadoRenta", updateSeEjecutoConExitoLarenta);
 router.delete("/:rentaUsuarioID", deleteRentaUsuario);
 
 module.exports = router;
