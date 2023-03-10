@@ -10,7 +10,17 @@ const getUsers = async (req, res) => {
     res.json(users);
   });
 };
-// Obtener un objeto por su id 
+//buscar un elemento por su ID 
+const getUser = async (req, res) => {
+  User.findOne({  _id: req.params.userID }, (err, user) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(user);
+  });
+};
+
+// validacion de datos login 
 const validLogin = async (req, res) => {
   try {
     let username = req.params.userNOMBREDEUSUARIO
@@ -95,6 +105,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getUsers,
+  getUser,
   validLogin,
   createUser,
   updateUser,

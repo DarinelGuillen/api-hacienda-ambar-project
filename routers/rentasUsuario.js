@@ -2,7 +2,7 @@ const {
     getRentasUsuario,
     getFalseRentasUsuario,
     getFinalizacion,
-    getIdRentaUsuario,
+    getIdRenta,
     createRentaUsuario,
     updateEstadoRenta,
     updateSeEjecutoConExitoLarenta,
@@ -23,7 +23,7 @@ const accountLimiter = rateLimit({
 router.get("/",getRentasUsuario); 
 router.get("/estadoFalse",getFalseRentasUsuario); 
 router.get("/Finalizar",getFinalizacion); 
-router.get("/:UserID",getIdRentaUsuario); 
+router.get("/:idRenta",getIdRenta); 
 router.post("/", accountLimiter, createRentaUsuario);
 router.put("/:rentaUsuarioID", updateEstadoRenta);
 router.put("/:rentaUsuarioID/:estadoRenta", updateSeEjecutoConExitoLarenta);

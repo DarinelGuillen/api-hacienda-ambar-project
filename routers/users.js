@@ -1,5 +1,6 @@
 const {
     getUsers,
+    getUser,
     validLogin,
     createUser,
     updateUser,
@@ -19,6 +20,7 @@ const {
 
   
   router.get("/",getUsers); 
+  router.get("/:userID",getUser); 
   router.get("/:userNOMBREDEUSUARIO/:userPASSWORD",accountLimiter,validLogin ); 
   router.post("/",accountLimiter, createUser); 
   router.put("/:userID",accountLimiter,updateUser ); 

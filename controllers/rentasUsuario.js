@@ -32,11 +32,11 @@ const getFinalizacion = async (req, res) => {
   }
 }
 //Obtener Una renta A traves De IDUser
-const getIdRentaUsuario=async(req, res)=>{
+const getIdRenta=async(req, res)=>{
   try{
     console.log("HOLA");
     let returnRenta=[];
-    const rentasUsuario = await RentaUsuario.findOne({idUser: req.params.UserID}).exec()
+    const rentasUsuario = await RentaUsuario.findOne({_id: req.params.idRenta}).exec()
     if (!rentasUsuario) {
       return res.status(404).send({ message: "Ninguna renta Disponible" })
     } 
@@ -149,7 +149,7 @@ module.exports = {
   getRentasUsuario,
   getFalseRentasUsuario,
   getFinalizacion,
-  getIdRentaUsuario,
+  getIdRenta,
   createRentaUsuario,
   updateEstadoRenta,
   updateSeEjecutoConExitoLarenta,
