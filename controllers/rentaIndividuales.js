@@ -10,6 +10,16 @@ const getRentIndiv = async (req, res) => {
     res.json(rentaindividuales);
   });
 };
+//obtener un objeto por el id 
+const getRentaIndiviual = async (req, res) => {
+  RentaIndividual.findOne({  _id: req.params.rentIndvID },
+    (err, rentaIndividual) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(rentaIndividual);
+  });
+};
 
 // Crear un objeto con el formato indicado
 const createRentIndv = async (req, res) => {
@@ -62,6 +72,7 @@ const deleteRentIndv = async (req, res) => {
 
 module.exports = {
   getRentIndiv,
+  getRentaIndiviual,
   createRentIndv,
   updateRentIndv,
   deleteRentIndv,

@@ -1,6 +1,6 @@
 const {
     getUsers,
-    getUser,
+    getUser,  
     validLogin,
     createUser,
     updateUser,

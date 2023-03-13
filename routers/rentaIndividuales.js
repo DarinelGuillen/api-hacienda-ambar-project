@@ -1,5 +1,6 @@
 const {
     getRentIndiv,
+    getRentaIndiviual,
     createRentIndv,
     updateRentIndv,
     deleteRentIndv
@@ -10,6 +11,7 @@ const {
   
 
 router.get("/", getRentIndiv); 
+router.get("/:rentIndvID", getRentaIndiviual); 
 router.post("/", createRentIndv); 
 router.put("/:rentaIndividualID", updateRentIndv);
 router.delete("/:rentaIndividualID", deleteRentIndv); 
