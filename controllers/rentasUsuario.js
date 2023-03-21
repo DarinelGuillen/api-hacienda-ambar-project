@@ -1,5 +1,6 @@
 // constante del modelo de datos
 const RentaUsuario = require("../model/rentasUsuario");
+const jwt = require("jsonwebtoken");
 
 // Obtener todos los objetos
 const getRentasUsuario = async (req, res) => {

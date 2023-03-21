@@ -1,5 +1,6 @@
 // constante del modelo de datos
 const RentaIndividual = require("../model/rentaIndividuales");
+const jwt = require("jsonwebtoken");
 
 // Obtener todos los objetos
 const getRentIndiv = async (req, res) => {
@@ -42,32 +43,36 @@ const createRentIndv = async (req, res) => {
 
 // actualizar un elemento a partir del _id
 const updateRentIndv = async (req, res) => {
-  RentaIndividual.findOneAndUpdate(
-    { _id: req.params.rentaIndividualID },
-    {
-      $set: {
-        idNum: req.body.idNum,
-        precioAprox: req.body.precioAprox,
-        descripcion: req.body.descripcion,
-        value: req.body.value,
-        cortoPlazo: req.body.cortoPlazo,
-        normal: req.body.normal,
-        ultimoMinuto: req.body.ultimoMinuto,
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    RentaIndividual.findOneAndUpdate(
+      { _id: req.params.rentaIndividualID },
+      {
+        $set: {
+          idNum: req.body.idNum,
+          precioAprox: req.body.precioAprox,
+          descripcion: req.body.descripcion,
+          value: req.body.value,
+          cortoPlazo: req.body.cortoPlazo,
+          normal: req.body.normal,
+          ultimoMinuto: req.body.ultimoMinuto,
+        },
       },
-    },
-    { new: true },
-    (err, RentaIndividual) => {
-      if (err) {
-        res.send(err);
-      } else res.json(RentaIndividual);
-    }
-  );
+      { new: true },
+      (err, RentaIndividual) => {
+        if (err) {
+          res.send(err);
+        } else res.json(RentaIndividual);
+      }
+    );
+  });
 };
 // borrar un elemento a través del _id
 const deleteRentIndv = async (req, res) => {
-  RentaIndividual.deleteOne({ _id: req.params.rentaIndividualID })
-    .then(() => res.json({ message: "RentaIndividual Deleted" }))
-    .catch((err) => res.send(err));
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    RentaIndividual.deleteOne({ _id: req.params.rentaIndividualID })
+      .then(() => res.json({ message: "RentaIndividual Deleted" }))
+      .catch((err) => res.send(err));
+  });
 };
 
 module.exports = {
