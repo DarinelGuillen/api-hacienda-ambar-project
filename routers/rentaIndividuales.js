@@ -1,3 +1,6 @@
+const verifyToken = require("../jwt");
+const router = require("express").Router();
+
 const {
     getRentIndiv,
     getRentaIndiviual,
@@ -6,14 +9,10 @@ const {
     deleteRentIndv
   } = require("../controllers/rentaIndividuales");
 
-  const router = require("express").Router();
-
-  
-
 router.get("/", getRentIndiv); 
 router.get("/:rentIndvID", getRentaIndiviual); 
 router.post("/", createRentIndv); 
-router.put("/:rentaIndividualID", updateRentIndv);
-router.delete("/:rentaIndividualID", deleteRentIndv); 
+router.put("/:rentaIndividualID",verifyToken,updateRentIndv);
+router.delete("/:rentaIndividualID",verifyToken,deleteRentIndv); 
 
 module.exports = router;

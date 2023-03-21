@@ -1,3 +1,5 @@
+const router = require("express").Router();
+const verifyToken = require("../jwt");
 const {
     getPaquetes,
     getPaquete,
@@ -6,13 +8,12 @@ const {
     deletePaquete
   } = require("../controllers/paquetes");
 
-  const router = require("express").Router();
 
   router.get("/", getPaquetes); 
-  router.get("/:paqueteID", getPaquete); 
-  router.post("/", createPaquete); 
-  router.put("/:paqueteID", updatePaquete);
-  router.delete("/:paqueteID", deletePaquete);
+  router.get("/:paqueteID",verifyToken,getPaquete); 
+  router.post("/",verifyToken,createPaquete); 
+  router.put("/:paqueteID",verifyToken,updatePaquete);
+  router.delete("/:paqueteID",verifyToken,deletePaquete);
 
   module.exports = router;
   
