@@ -51,7 +51,27 @@ const getIdRenta=async(req, res)=>{
   
 }
 
+//obttene a traves del id de usuari solo la rentas del x usuario
 
+const getByIdUser = async (req, res) => {
+ console.log("🚀 ~ file: rentasUsuario.js:57 ~ getByIdUser ~ req:", req)
+ 
+  try{
+    console.log("getBy ID USER");
+    
+    const rentasUsuario = await RentaUsuario.find({idUser: req.params.idUser}).exec()
+    if (!rentasUsuario) {
+      return res.status(404).send({ message: "Ninguna renta Disponible" })
+    } 
+    // returnRenta.push(rentasUsuario)
+    // console.log(JSON.stringify(rentasUsuario),"////////",JSON.stringify(rentasUsuario));
+    return res.status(200).json({rentasUsuario})
+
+  }catch(error){
+    console.log(error);
+    return res.status(500).send({ error: "Error en el servidor" })
+  }
+};
 
 
 // Crear un objeto con el formato indicado
@@ -150,6 +170,7 @@ module.exports = {
   getFalseRentasUsuario,
   getFinalizacion,
   getIdRenta,
+  getByIdUser,
   createRentaUsuario,
   updateEstadoRenta,
   updateSeEjecutoConExitoLarenta,

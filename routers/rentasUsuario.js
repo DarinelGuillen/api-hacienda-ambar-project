@@ -3,6 +3,7 @@ const {
     getFalseRentasUsuario,
     getFinalizacion,
     getIdRenta,
+    getByIdUser,
     createRentaUsuario,
     updateEstadoRenta,
     updateSeEjecutoConExitoLarenta,
@@ -24,6 +25,7 @@ router.get("/",getRentasUsuario);
 router.get("/estadoFalse",getFalseRentasUsuario); 
 router.get("/Finalizar",getFinalizacion); 
 router.get("/:idRenta",getIdRenta); 
+router.get("/:idUser/:true",getByIdUser); 
 router.post("/", accountLimiter, createRentaUsuario);
 router.put("/:rentaUsuarioID", updateEstadoRenta);
 router.put("/:rentaUsuarioID/:estadoRenta", updateSeEjecutoConExitoLarenta);
