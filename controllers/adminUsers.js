@@ -1,14 +1,18 @@
 // constante del modelo de datos
 const AdminUsers = require("../model/adminUsers");
+const jwt = require("jsonwebtoken");
 
 // Obtener todos los objetos
 const getAdminUsers = async (req, res) => {
-  AdminUsers.find((err,todosUsers) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(todosUsers);
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    AdminUsers.find((err,todosUsers) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(todosUsers);
+    });
   });
+  
 };
 // Crear un objeto con el formato indicado
 const createAdminUser = async (req, res) => {
@@ -27,27 +31,31 @@ const createAdminUser = async (req, res) => {
 
 // actualizar un elemento a partir del _id
 const updateAdminUser = async (req, res) => {
-  AdminUsers.findOneAndUpdate(
-    { _id: req.params.adminUsersID },
-    {
-      $set: {
-        nombreAdmin: req.body.nombreAdmin,
-        password: req.body.password
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    AdminUsers.findOneAndUpdate(
+      { _id: req.params.adminUsersID },
+      {
+        $set: {
+          nombreAdmin: req.body.nombreAdmin,
+          password: req.body.password
+        },
       },
-    },
-    { new: true },
-    (err, AdminUsers) => {
-      if (err) {
-        res.send(err);
-      } else res.json(AdminUsers);
-    }
-  );
+      { new: true },
+      (err, AdminUsers) => {
+        if (err) {
+          res.send(err);
+        } else res.json(AdminUsers);
+      }
+    );
+  });
 };
 // borrar un elemento a través del _id
 const deleteAdminUsers = async (req, res) => {
-  AdminUsers.deleteOne({ _id: req.params.adminUsersID })
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    AdminUsers.deleteOne({ _id: req.params.adminUsersID })
     .then(() => res.json({ message: "AdminUsers Deleted" }))
     .catch((err) => res.send(err));
+  });
 };
 
 

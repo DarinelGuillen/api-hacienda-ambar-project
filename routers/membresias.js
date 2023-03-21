@@ -1,3 +1,6 @@
+const verifyToken = require("../jwt");
+const router = require("express").Router();
+
 const {
     getMembresias,
     createMembresia,
@@ -5,11 +8,10 @@ const {
     deleteMembresia
   } = require("../controllers/membresias");
 
-const router = require("express").Router();
 
-router.get("/", getMembresias); 
-router.post("/", createMembresia); 
-router.put("/:membresiasID",updateMembresia);
-router.delete("/:membresiaID",deleteMembresia);
+router.get("/",verifyToken,getMembresias); 
+router.post("/",verifyToken,createMembresia); 
+router.put("/:membresiasID",verifyToken,updateMembresia);
+router.delete("/:membresiaID",verifyToken,deleteMembresia);
 
 module.exports = router;

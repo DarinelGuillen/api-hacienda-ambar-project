@@ -1,3 +1,6 @@
+const verifyToken = require("../jwt");
+const router = require("express").Router();
+
 const {
     getAdminUsers,
     createAdminUser,
@@ -5,11 +8,10 @@ const {
     deleteAdminUsers
   } = require("../controllers/adminUsers");
 
-const router = require("express").Router();
 
 router.get("/", getAdminUsers); 
 router.post("/",createAdminUser);
-router.put("/:adminUsersID",updateAdminUser);
-router.delete("/:adminUsersID",deleteAdminUsers);
+router.put("/:adminUsersID",verifyToken,updateAdminUser);
+router.delete("/:adminUsersID",verifyToken,deleteAdminUsers);
 
 module.exports = router;
