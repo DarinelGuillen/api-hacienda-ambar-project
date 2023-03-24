@@ -4,21 +4,24 @@ const jwt = require("jsonwebtoken");
 
 // Obtener todos los objetos
 const getPaquetes = async (req, res) => {
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
     Paquete.find((err, paquetes) => {
     if (err) {
       res.send(err);
     }
     res.json(paquetes);
   });
+  });
 };
 //Encontrar paquete por _ID
 const getPaquete = async (req, res) => {
-  
-  Paquete.findOne({  _id: req.params.paqueteID }, (err, paquete) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(paquete);
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    Paquete.findOne({  _id: req.params.paqueteID }, (err, paquete) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(paquete);
+    });
   });
 };
 

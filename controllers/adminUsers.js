@@ -58,8 +58,6 @@ const deleteAdminUsers = async (req, res) => {
   });
 };
 
-
-
 module.exports = {
   getAdminUsers,
   createAdminUser,
