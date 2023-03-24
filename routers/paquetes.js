@@ -9,8 +9,8 @@ const {
   } = require("../controllers/paquetes");
 
 
-  router.get("/", getPaquetes); 
-  router.get("/:paqueteID",verifyToken,getPaquete); 
+  router.get("/",verifyToken, getPaquetes); 
+  router.get("/:paqueteID",verifyToken,verifyToken,getPaquete); 
   router.post("/",verifyToken,createPaquete); 
   router.put("/:paqueteID",verifyToken,updatePaquete);
   router.delete("/:paqueteID",verifyToken,deletePaquete);
