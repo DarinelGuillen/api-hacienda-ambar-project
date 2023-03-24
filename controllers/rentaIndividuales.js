@@ -4,41 +4,49 @@ const jwt = require("jsonwebtoken");
 
 // Obtener todos los objetos
 const getRentIndiv = async (req, res) => {
-  RentaIndividual.find((err, rentaindividuales) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(rentaindividuales);
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    RentaIndividual.find((err, rentaindividuales) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(rentaindividuales);
+    });
+    
   });
+  
 };
 //obtener un objeto por el id 
-const getRentaIndiviual = async (req, res) => {
-  RentaIndividual.findOne({  _id: req.params.rentIndvID },
-    (err, rentaIndividual) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(rentaIndividual);
+const getRentaIndiviual =  (req, res) => {
+  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    RentaIndividual.findOne({  _id: req.params.rentIndvID },
+      (err, rentaIndividual) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(rentaIndividual);
+    });
   });
 };
 
 // Crear un objeto con el formato indicado
-const createRentIndv = async (req, res) => {
-  const rentaIndividual = new RentaIndividual({
-    idNum: req.body.idNum,
-    precioAprox: req.body.precioAprox,
-    descripcion: req.body.descripcion,
-    value: req.body.value,
-    cortoPlazo: req.body.cortoPlazo,
-    normal: req.body.normal,
-    ultimoMinuto: req.body.ultimoMinuto,
+const createRentIndv =  (req, res) => {
+   jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
+    const rentaIndividual = new RentaIndividual({
+      idNum: req.body.idNum,
+      precioAprox: req.body.precioAprox,
+      descripcion: req.body.descripcion,
+      value: req.body.value,
+      cortoPlazo: req.body.cortoPlazo,
+      normal: req.body.normal,
+      ultimoMinuto: req.body.ultimoMinuto,
+    });
+    try {
+      const newRentaIndividual =  rentaIndividual.save();
+      res.status(201).json(newRentaIndividual);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   });
-  try {
-    const newRentaIndividual = await rentaIndividual.save();
-    res.status(201).json(newRentaIndividual);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
 };
 
 // actualizar un elemento a partir del _id

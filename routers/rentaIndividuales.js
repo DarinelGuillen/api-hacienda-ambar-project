@@ -9,9 +9,9 @@ const {
     deleteRentIndv
   } = require("../controllers/rentaIndividuales");
 
-router.get("/", getRentIndiv); 
-router.get("/:rentIndvID", getRentaIndiviual); 
-router.post("/", createRentIndv); 
+router.get("/",verifyToken, getRentIndiv); 
+router.get("/:rentIndvID",verifyToken, getRentaIndiviual); 
+router.post("/",verifyToken, createRentIndv); 
 router.put("/:rentaIndividualID",verifyToken,updateRentIndv);
 router.delete("/:rentaIndividualID",verifyToken,deleteRentIndv); 
 

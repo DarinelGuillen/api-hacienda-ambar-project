@@ -22,14 +22,14 @@ const accountLimiter = rateLimit({
   message: "Por seguridad restringimos peticiones de tu IP"
 });
 
-router.get("/",getRentasUsuario); 
-router.get("/estadoFalse",getFalseRentasUsuario); 
-router.get("/Finalizar",getFinalizacion); 
-router.get("/:idRenta",getIdRenta); 
-router.get("/:idUser/:true",getByIdUser); 
-router.post("/",accountLimiter, createRentaUsuario);
-router.put("/:rentaUsuarioID",updateEstadoRenta);
-router.put("/:rentaUsuarioID/:estadoRenta",updateSeEjecutoConExitoLarenta);
-router.delete("/:rentaUsuarioID",deleteRentaUsuario);
+router.get("/",verifyToken,getRentasUsuario); 
+router.get("/estadoFalse",verifyToken,getFalseRentasUsuario); 
+router.get("/Finalizar",verifyToken,getFinalizacion); 
+router.get("/:idRenta",verifyToken,getIdRenta); 
+router.get("/:idUser/:true",verifyToken,getByIdUser); 
+router.post("/",accountLimiter,verifyToken,createRentaUsuario);
+router.put("/:rentaUsuarioID",verifyToken,updateEstadoRenta);
+router.put("/:rentaUsuarioID/:estadoRenta",verifyToken,updateSeEjecutoConExitoLarenta);
+router.delete("/:rentaUsuarioID",verifyToken,deleteRentaUsuario);
 
 module.exports = router;
