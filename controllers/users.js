@@ -101,7 +101,6 @@ const createUser = async (req, res) => {
     if (err) {
       res.send(err);
     } /// no registra con correo estables 
-    res.json(user);
     sns.subscribe({
       TopicArn: topicArn,
       Protocol: 'email',
@@ -114,6 +113,7 @@ const createUser = async (req, res) => {
       }
     });
   });
+  res.json(user);
   
 };
 // actualizar un elemento a partir del _id
