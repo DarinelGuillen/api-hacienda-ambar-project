@@ -21,7 +21,7 @@
   router.get("/",verifyToken,getUsers); 
   router.get("/:userID",verifyToken,getUser); 
   router.get("/:userNOMBREDEUSUARIO/:userPASSWORD",accountLimiter,validLogin ); 
-  router.post("/",verifyToken,accountLimiter, createUser); 
+  router.post("/",createUser); 
   router.put("/:userID",verifyToken,accountLimiter,updateUser ); 
   router.delete("/:userID",verifyToken,accountLimiter,deleteUser);
   

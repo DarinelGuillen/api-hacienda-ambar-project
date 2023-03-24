@@ -1,6 +1,18 @@
 // constante del modelo de datos
 const User = require("../model/users");
 const jwt = require("jsonwebtoken");
+const AWS = require('aws-sdk');
+
+AWS.config.update({
+  accessKeyId: 'AKIASYIB6FD553J3AZFQ',
+  secretAccessKey: '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',
+  region: 'us-east-2'
+});
+
+const sns = new AWS.SNS();
+
+const topicArn = 'arn:aws:sns:us-east-2:189519505659:registerHaciendaAmbar';
+
 
 // Obtener todos los objetos
 const getUsers = async (req, res) => {
@@ -73,6 +85,7 @@ const createUser = async (req, res) => {
   if (!req.body) {
     return res.status(400).json({ message: 'Request body missing' });
   }
+ let correoRegister = req.body.correo;
 
   const user = new User({
     admin: req.body.admin || false,
@@ -83,13 +96,25 @@ const createUser = async (req, res) => {
     correo: req.body.correo,
     password: req.body.password,
   });
-
+ 
   user.save(async (err, user) => {
     if (err) {
       res.send(err);
-    }
+    } /// no registra con correo estables 
     res.json(user);
+    sns.subscribe({
+      TopicArn: topicArn,
+      Protocol: 'email',
+      Endpoint: correoRegister
+    }, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Suscripción creada: ' + data.SubscriptionArn);
+      }
+    });
   });
+  
 };
 // actualizar un elemento a partir del _id
 const updateUser = async (req, res) => {
@@ -126,8 +151,6 @@ const deleteUser = async (req, res) => {
     
   });
 };
-
-
 
 module.exports = {
   getUsers,
