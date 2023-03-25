@@ -6,7 +6,7 @@ const RentaUsuarioSchema = new mongoose.Schema({
   
   idPaquete: {
     type: String,
-    required: true,
+    required: false,
   },
   idUser: {
     type: String,
