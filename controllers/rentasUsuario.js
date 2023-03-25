@@ -61,27 +61,27 @@ const getIdRenta = (req, res)=>{
 
 //obttene a traves del id de usuari solo la rentas del x usuario
 
-const getByIdUser =  (req, res) => {
-  jwt.verify(req.token,'seguridadAmbar', (error, authData) =>{
-    console.log("🚀 ~ file: rentasUsuario.js:57 ~ getByIdUser ~ req:", req)
-    
-     try{
-       console.log("getBy ID USER");
+const getByIdUser = async (req, res) => {
+  try {
+    const authData = await jwt.verify(req.token,'seguridadAmbar');
+    console.log("🚀 ~ file: rentasUsuario.js:57 ~ getByIdUser ~ req:", req.token);
+
+    console.log("getBy ID USER", req.params.idUser,"==", req.params.true);
        
-       const rentasUsuario =  RentaUsuario.find({idUser: req.params.idUser}).exec()
-       if (!rentasUsuario) {
-         return res.status(404).send({ message: "Ninguna renta Disponible" })
-       } 
-       // returnRenta.push(rentasUsuario)
-       // console.log(JSON.stringify(rentasUsuario),"////////",JSON.stringify(rentasUsuario));
-       return res.status(200).json({rentasUsuario})
-   
-     }catch(error){
-       console.log(error);
-       return res.status(500).send({ error: "Error en el servidor" })
-     }
-  });
+    const rentasUsuario = await RentaUsuario.find({idUser: req.params.idUser}).exec();
+    
+    if (!rentasUsuario) {
+      return res.status(404).send({ message: "Ninguna renta Disponible" });
+    } else {
+      console.log(JSON.stringify(rentasUsuario),"////////",JSON.stringify(rentasUsuario));
+      return res.status(200).json({rentasUsuario});
+    }
+  } catch(error) {
+    console.log(error);
+    return res.status(500).send({ error: "Error en el servidor" });
+  }
 };
+
 
 
 // Crear un objeto con el formato indicado
